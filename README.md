@@ -71,41 +71,62 @@ class NeuralNet(nn.Module):
 
 # Initialize the Model, Loss Function, and Optimizer
 
-ai_brain=NeuralNet()
+Malligesh=NeuralNet()
 criterion = nn.MSELoss()
-optimizer = optim.RMSprop(ai_brain.parameters(), lr=0.001)
+optimizer = optim.RMSprop(Malligesh.parameters(), lr=0.001)
 
-def train_model(ai_brain, X_train, y_train, criterion, optimizer, epochs=2000):
-    #Include your code here
-for epoch in range(epochs):
+def train_model(Malligesh, X_train, y_train, criterion, optimizer, epochs=2000):
+    for epoch in range(epochs):
         optimizer.zero_grad()
-        loss = criterion(ai_brain(X_train), y_train)
+        loss = criterion(Malligesh(X_train), y_train)
         loss.backward()
         optimizer.step()
 
-        ai_brain.history['loss'].append(loss.item())
+        Malligesh.history['loss'].append(loss.item())
         if epoch % 200 == 0:
             print(f'Epoch [{epoch}/{epochs}], Loss: {loss.item():.6f}')
+train_model(Malligesh, X_train_tensor, y_train_tensor, criterion, optimizer)
+
+h torch.no_grad():
+    test_loss = criterion(Malligesh(X_test_tensor), y_test_tensor)
+    print(f'Test Loss: {test_loss.item():.6f}')
+
+loss_df = pd.DataFrame(Malligesh.history)
+import matplotlib.pyplot as plt
+loss_df.plot()
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.title("Loss during Training")
+plt.show()
+X_n1_1 = torch.tensor([[9]], dtype=torch.float32)
+prediction = Malligesh(torch.tensor(scaler.transform(X_n1_1), dtype=torch.float32)).item()
+print(f'Prediction: {prediction}')
+
 
 
 
 ```
 ## Dataset Information
 
-Include screenshot of the dataset
+<img width="615" height="361" alt="image" src="https://github.com/user-attachments/assets/dc7d07d9-b6f6-43ae-a7e2-16a189656aea" />
+
 
 ## OUTPUT
-<img width="988" height="817" alt="image" src="https://github.com/user-attachments/assets/5c892466-6321-4467-a101-80fe8818bea4" />
+<img width="974" height="790" alt="image" src="https://github.com/user-attachments/assets/cc013295-c26d-4d4f-8159-ef4f58650f35" />
+
+
+<img width="985" height="593" alt="image" src="https://github.com/user-attachments/assets/3d065a0c-7ff3-45b4-af47-2c745e879e8c" />
 
 
 ### Training Loss Vs Iteration Plot
 
-Include your plot here
+<img width="974" height="790" alt="image" src="https://github.com/user-attachments/assets/cc013295-c26d-4d4f-8159-ef4f58650f35" />
+
 
 ### New Sample Data Prediction
+<img width="808" height="120" alt="image" src="https://github.com/user-attachments/assets/f8ee96cc-094b-4412-840e-110be0a9f048" />
 
-Include your sample input and output here
 
 ## RESULT
 
-Include your result here
+The program to develop a neural network regression model for the given dataset has been executed successively
